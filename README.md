@@ -24,14 +24,15 @@ The application uses `memo` from React to memoize components, preventing re-rend
 
 1. **Calculator Component**: Wrapped with `memo` to prevent re-rendering when props remain the same:
 
-   ```jsx
-   export default memo(Calculator);
-   ```
+```jsx
+export default memo(Calculator);
+```
 
 2. **ToggleSounds Component**: Memoized to optimize rendering when the sound toggle state doesn't change:
-   ```jsx
-   export default memo(ToggleSounds);
-   ```
+
+```jsx
+export default memo(ToggleSounds);
+```
 
 ### useMemo Hook
 
