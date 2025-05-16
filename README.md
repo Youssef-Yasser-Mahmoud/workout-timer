@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Workout Timer App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React application that helps users calculate workout durations based on exercise type, sets, speed, and break lengths.
 
-## Available Scripts
+## Overview
+
+This application allows users to:
+
+- Select different workout types (with varying numbers of exercises)
+- Adjust the number of sets
+- Set their exercise pace (seconds per exercise)
+- Configure break durations between sets
+- Toggle sound notifications on/off
+
+The app automatically calculates the total workout time based on these parameters, helping users plan their fitness routines effectively.
+
+## React Performance Optimization
+
+This project demonstrates the use of React's optimization features to prevent unnecessary re-renders:
+
+### React.memo
+
+The application uses `memo` from React to memoize components, preventing re-renders when props haven't changed:
+
+1. **Calculator Component**: Wrapped with `memo` to prevent re-rendering when props remain the same:
+
+   ```jsx
+   export default memo(Calculator);
+   ```
+
+2. **ToggleSounds Component**: Memoized to optimize rendering when the sound toggle state doesn't change:
+   ```jsx
+   export default memo(ToggleSounds);
+   ```
+
+### useMemo Hook
+
+The `useMemo` hook is used to memoize computed values, recalculating them only when dependencies change:
+
+```jsx
+const workouts = useMemo(
+  () => [
+    {
+      name: 'Full-body workout',
+      numExercises: partOfDay === 'AM' ? 9 : 8,
+    },
+    // other workout definitions...
+  ],
+  [partOfDay] // Only recalculate when partOfDay changes
+);
+```
+
+This optimization ensures that the workout options are only recalculated when the time of day changes (AM/PM), preventing unnecessary recalculations during renders triggered by other state changes.
+
+## Key Features
+
+- Dynamic workout options that change based on time of day (AM/PM)
+- Real-time workout duration calculation
+- Configurable exercise parameters
+- Sound toggle functionality
+- Clean, user-friendly interface
+
+## Running the Project
 
 In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Runs the app in development mode at [http://localhost:3000](http://localhost:3000)
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `build` folder
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technologies Used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- React (with Hooks)
+- CSS for styling
+- JavaScript audio API for sound effects
